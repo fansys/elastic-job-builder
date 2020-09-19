@@ -21,7 +21,7 @@ jobs:
       with:
         repository: apache/shardingsphere-elasticjob-ui
         ref: 'master'
-        path: 'elasticjob-ui'
+        # path: 'elasticjob-ui'
 
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
