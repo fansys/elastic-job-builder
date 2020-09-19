@@ -29,4 +29,6 @@ jobs:
       run: |
         ls -l
         mvn clean package -Prelease --file pom.xml
-        ls -l shardingsphere-elasticjob-ui/shardingsphere-elasticjob-ui-distribution/shardingsphere-elasticjob-lite-ui-bin-distribution/target/
+        ls -l shardingsphere-elasticjob-ui-distribution/
+        ls -l shardingsphere-elasticjob-ui-distribution/shardingsphere-elasticjob-lite-ui-bin-distribution/
+        ls -l shardingsphere-elasticjob-ui-distribution/shardingsphere-elasticjob-lite-ui-bin-distribution/target/
