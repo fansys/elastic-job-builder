@@ -43,7 +43,50 @@ jobs:
       
     - name: show result
       run: |
-        ls -l build/
-        ls -l ${{ env.SOURCE }}/
+        timestamp=`date '+%Y%m%d'`
+        echo '::set-env name=TIMESTAMP::'$timestamp
         
+        lite_ui_name=`ls ./build/ | grep lite-ui | sed 's/.tar.gz//g'`
+        cloud_ui_name=`ls ./build/ | grep cloud-ui | sed 's/.tar.gz//g'`
+        echo '::set-env name=ELASTIC_LITE_UI::'$lite_ui_name
+        echo '::set-env name=ELASTIC_CLOUD_UI::'$cloud_ui_name
+        
+        t=`echo ${lite_ui_name##*elasticjob-}`
+        version=`echo ${t%%-lite-ui*}`
+        echo '::set-env name=VERSION::'$version
+        
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ env.VERSION }}
+        release_name: ${{ env.VERSION }}-${{ env.TIMESTAMP }}
+        body: |
+          Release ${{ env.VERSION }}
+        draft: false
+        prerelease: false
+
+      - name: Upload ELASTIC-LITE-UI Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build/${{ env.ELASTIC_LITE_UI }}.tar.gz
+          asset_name: ${{ env.ELASTIC_LITE_UI }}.tar.gz
+          asset_content_type: application/x-compressed-tar
+          
+      - name: Upload ELASTIC-CLOUD-UI Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build/${{ env.ELASTIC_CLOUD_UI }}.tar.gz
+          asset_name: ${{ env.ELASTIC_CLOUD_UI }}.tar.gz
+          asset_content_type: application/x-compressed-tar
      
