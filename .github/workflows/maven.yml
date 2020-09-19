@@ -69,7 +69,7 @@ jobs:
         prerelease: false
 
     - name: Upload ELASTIC-LITE-UI Release Asset
-      id: upload-release-asset 
+      id: upload-lite-release-asset 
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -80,7 +80,7 @@ jobs:
         asset_content_type: application/x-compressed-tar
         
     - name: Upload ELASTIC-CLOUD-UI Release Asset
-      id: upload-release-asset 
+      id: upload-cloud-release-asset 
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
