@@ -28,5 +28,5 @@ jobs:
     - name: Build with Maven
       run: |
         ls -l
-        ls -l shardingsphere-elasticjob-ui
-        mvn -B package --file elasticjob-ui/pom.xml
+        mvn clean package -Prelease --file pom.xml
+        ls -l shardingsphere-elasticjob-ui/shardingsphere-elasticjob-ui-distribution/shardingsphere-elasticjob-lite-ui-bin-distribution/target/
