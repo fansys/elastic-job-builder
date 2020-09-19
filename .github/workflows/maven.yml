@@ -35,7 +35,7 @@ jobs:
         mvn clean package -Prelease --file ${{ env.SOURCE }}/pom.xml
         cp ${{ env.SOURCE }}/shardingsphere-elasticjob-ui-distribution/*/target/*.tar.gz .build/
         
-    -name: show result
+    - name: show result
       run: |
         ls -l build/
         ls -l ${{ env.SOURCE }}/
